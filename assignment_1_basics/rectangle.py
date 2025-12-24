@@ -1,7 +1,9 @@
 """This module provides a simple class to represent a rectangle."""
 
+
 class Rectangle:
     """Represent the Rectangle with a width and a height."""
+
     def __init__(self, width: int|float, height: int|float) -> None:
         """Initialize the Rectangle with the width and height."""
         self.__width = width

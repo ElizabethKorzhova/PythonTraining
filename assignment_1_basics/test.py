@@ -2,6 +2,7 @@
 This module is designed for testing the functionality of the Rectangle class and
 correctness of work calculate_circle_area function
 """
+
 from rectangle import Rectangle
 from math_functions import calculate_circle_area
 
