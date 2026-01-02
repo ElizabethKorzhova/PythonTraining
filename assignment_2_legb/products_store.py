@@ -20,7 +20,7 @@ def create_product(name: str, price: float, quantity: int) -> tuple[
         print(f"Price changed to {new_price}")
         return product
 
-    def get_product():
+    def get_product() -> dict[str, str | float | int]:
         """Function to get the product information."""
         return product
 
