@@ -1,13 +1,13 @@
 """This module is designed for simulation products management in an online store.
-In particular, the function of changing the price of the product and the function of getting the information
-about product have been implemented."""
+In particular, the function of changing the price of the product and the function
+of getting the information about product have been implemented."""
 
 from typing import Callable
 
 
 def create_product(name: str, price: float, quantity: int) -> tuple[
     Callable[[], dict[str, str | float | int]], Callable[[float], dict[str, str | float | int]]]:
-    """Function to create a product with given name, price and quantity"""
+    """Function to create a product with given name, price and quantity."""
     product: dict[str, str | int | float] = {
         "name": name,
         "price": price,
@@ -15,13 +15,13 @@ def create_product(name: str, price: float, quantity: int) -> tuple[
     }
 
     def change_price(new_price: float) -> dict[str, str | float | int]:
-        """Function to change the price of the product"""
+        """Function to change the price of the product."""
         product["price"] = new_price
         print(f"Price changed to {new_price}")
         return product
 
     def get_product():
-        """Function to get the product information"""
+        """Function to get the product information."""
         return product
 
     return get_product, change_price
