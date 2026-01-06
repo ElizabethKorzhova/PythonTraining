@@ -28,7 +28,7 @@ class Vector:
         return Vector(self.x_component * number, self.y_component * number)
 
     def __lt__(self, other: Vector) -> bool:
-        """Checks if Vector is less than others."""
+        """Checks if the length of Vector is less than the other."""
         return self.get_vector_length() < other.get_vector_length()
 
     def __eq__(self, other: object) -> bool:
