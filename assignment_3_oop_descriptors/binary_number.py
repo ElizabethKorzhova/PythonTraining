@@ -44,11 +44,12 @@ class BinaryNumber:
         return bin(int(self.bin_number, 2))[2:]
 
 
-bin_1 = BinaryNumber("101")
-bin_2 = BinaryNumber("11")
+if __name__ == "__main__":
+    bin_1 = BinaryNumber("101")
+    bin_2 = BinaryNumber("11")
 
-print(f"The bitwise AND operation between {bin_1} and {bin_2} is {bin_1 & bin_2}\n"
-      f"The bitwise OR operation between {bin_1} and {bin_2} is {bin_1 | bin_2}\n"
-      f"The bitwise XOR operation between {bin_1} and {bin_2} is {bin_1 ^ bin_2}\n"
-      f"The bitwise NOT operation {bin_1} is {~bin_1}\n"
-      f"The bitwise NOT operation {bin_2} is {~bin_2}\n")
+    print(f"The bitwise AND operation between {bin_1} and {bin_2} is {bin_1 & bin_2}\n"
+          f"The bitwise OR operation between {bin_1} and {bin_2} is {bin_1 | bin_2}\n"
+          f"The bitwise XOR operation between {bin_1} and {bin_2} is {bin_1 ^ bin_2}\n"
+          f"The bitwise NOT operation {bin_1} is {~bin_1}\n"
+          f"The bitwise NOT operation {bin_2} is {~bin_2}\n")

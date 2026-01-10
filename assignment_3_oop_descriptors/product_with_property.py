@@ -52,7 +52,8 @@ class ProductWithProperty:
         return price.quantize(Decimal("0.01"))
 
 
-product_1 = ProductWithProperty("Doll", 10.2)
-print(f"{product_1.name}: {product_1.price}\n"
-      f"through __repr__\n{product_1}")
-product_1.price = -10.1
+if __name__ == "__main__":
+    product_1 = ProductWithProperty("Doll", 10.2)
+    print(f"{product_1.name}: {product_1.price}\n"
+          f"through __repr__\n{product_1}")
+    product_1.price = -10.1

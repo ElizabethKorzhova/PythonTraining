@@ -42,10 +42,11 @@ class Fraction:
         return f"{self.numerator}/{self.denominator}"
 
 
-fraction_a = Fraction(-1, -4)
-fraction_b = Fraction(1, 2)
+if __name__ == "__main__":
+    fraction_a = Fraction(-1, -4)
+    fraction_b = Fraction(1, 2)
 
-print(f"Sum of {fraction_a} and {fraction_b} is {fraction_a + fraction_b}\n"
-      f"Difference of {fraction_a} and {fraction_b} is {fraction_a - fraction_b}\n"
-      f"Product of {fraction_a} and {fraction_b} is {fraction_a * fraction_b}\n"
-      f"Quotient of {fraction_a} and {fraction_b} is {fraction_a / fraction_b}\n")
+    print(f"Sum of {fraction_a} and {fraction_b} is {fraction_a + fraction_b}\n"
+          f"Difference of {fraction_a} and {fraction_b} is {fraction_a - fraction_b}\n"
+          f"Product of {fraction_a} and {fraction_b} is {fraction_a * fraction_b}\n"
+          f"Quotient of {fraction_a} and {fraction_b} is {fraction_a / fraction_b}\n")

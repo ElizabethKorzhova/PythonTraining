@@ -22,25 +22,25 @@ class User:
         """Gets first name."""
         return self.__first_name
 
-    @property
-    def last_name(self) -> str:
-        """Gets last name."""
-        return self.__last_name
-
-    @property
-    def email(self) -> str:
-        """Gets email address."""
-        return self.__email
-
     @first_name.setter
     def first_name(self, first_name: str) -> None:
         """Sets first name."""
         self.__first_name = first_name
 
+    @property
+    def last_name(self) -> str:
+        """Gets last name."""
+        return self.__last_name
+
     @last_name.setter
     def last_name(self, last_name: str) -> None:
         """Sets last name."""
         self.__last_name = last_name
+
+    @property
+    def email(self) -> str:
+        """Gets email address."""
+        return self.__email
 
     @email.setter
     def email(self, email: str) -> None:
@@ -57,9 +57,10 @@ class User:
         return bool(re.fullmatch(regex, email_to_check))
 
 
-user_1 = User("John", "Smith", "john@gmail.com")
-print(user_1)
-user_1.first_name = "Mike"
-user_1.last_name = "Miller"
-print(user_1)
-user_1.email = "m@@g.co"
+if __name__ == "__main__":
+    user_1 = User("John", "Smith", "john@gmail.com")
+    print(user_1)
+    user_1.first_name = "Mike"
+    user_1.last_name = "Miller"
+    print(user_1)
+    user_1.email = "m@@g.co"

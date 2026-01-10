@@ -52,10 +52,11 @@ def my_min(my_list: MyList) -> int | float:
     return min_number
 
 
-numbers_list = MyList([2, 1.5, 3, 0.5])
-empty_list = MyList([])
-print(f"List: {numbers_list.my_list}\nLength of the list: {len(numbers_list)}"
-      f"\nSum result: {my_sum(numbers_list)}\nMinimum number in the list: {my_min(numbers_list)}\n"
-      f"\nEmpty list result check: {empty_list.my_list}\n"
-      f"Length of the list: {len(empty_list)}\nSum result: {my_sum(empty_list)}\n")
-print(my_min(empty_list))
+if __name__ == "__main__":
+    numbers_list = MyList([2, 1.5, 3, 0.5])
+    empty_list = MyList([])
+    print(f"List: {numbers_list.my_list}\nLength of the list: {len(numbers_list)}"
+          f"\nSum result: {my_sum(numbers_list)}\nMinimum number in the list: {my_min(numbers_list)}\n"
+          f"\nEmpty list result check: {empty_list.my_list}\n"
+          f"Length of the list: {len(empty_list)}\nSum result: {my_sum(empty_list)}\n")
+    print(my_min(empty_list))
