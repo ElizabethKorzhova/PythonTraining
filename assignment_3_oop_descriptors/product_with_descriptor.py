@@ -2,13 +2,13 @@
 
 from decimal import Decimal
 from typing import Literal
-from descriptors import ProductDescriptor, CurrencyDescriptor
+from descriptors import Descriptor, CurrencyDescriptor
 
 
 class ProductWithDescriptor:
     """Represents the ProductWithDescriptor class with name of product, its price and currency."""
-    name = ProductDescriptor()
-    price = ProductDescriptor()
+    name = Descriptor()
+    price = Descriptor()
     currency = CurrencyDescriptor()
 
     def __init__(self, name: str, price: float, currency: Literal["USD", "EUR"] = "USD") -> None:
