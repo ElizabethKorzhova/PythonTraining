@@ -36,21 +36,22 @@ class Person:
         return self.age == other.age
 
 
-person_list = [
-    Person("Jack", 28),
-    Person("Nick", 18),
-    Person("Anna", 34),
-    Person("Bob", 30),
-    Person("Marry", 30)
-]
+if __name__ == "__main__":
+    person_list = [
+        Person("Jack", 28),
+        Person("Nick", 18),
+        Person("Anna", 34),
+        Person("Bob", 30),
+        Person("Marry", 30)
+    ]
 
-person_list.sort(key=lambda person: person.age)
+    person_list.sort(key=lambda person: person.age)
 
-print("Sorted by age:")
-for person_data in person_list:
-    print(f"{person_data.name}, {person_data.age} years old")
+    print("Sorted by age:")
+    for person_data in person_list:
+        print(f"{person_data.name}, {person_data.age} years old")
 
-print(f"\nIs {person_list[0].name} older than {person_list[3].name}?\n"
-      f" {person_list[0] > person_list[3]}\nIs {person_list[1].name} younger then "
-      f"{person_list[2].name}?\n {person_list[1] < person_list[2]}\nAre {person_list[3].name} "
-      f"and {person_list[4].name}the same age?\n {person_list[3] == person_list[4]}")
+    print(f"\nIs {person_list[0].name} older than {person_list[3].name}?\n"
+          f" {person_list[0] > person_list[3]}\nIs {person_list[1].name} younger then "
+          f"{person_list[2].name}?\n {person_list[1] < person_list[2]}\nAre {person_list[3].name} "
+          f"and {person_list[4].name}the same age?\n {person_list[3] == person_list[4]}")

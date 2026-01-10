@@ -1,6 +1,7 @@
 """This module is designed for representation Fraction class using dunder methods."""
 
 from __future__ import annotations
+from math import gcd
 
 
 class Fraction:
@@ -8,8 +9,13 @@ class Fraction:
 
     def __init__(self, numerator: int, denominator: int) -> None:
         """Initializes Fraction class with numerator and denominator."""
-        self.numerator = numerator
-        self.denominator = denominator
+        if numerator < 0 and denominator < 0:
+            numerator = abs(numerator)
+            denominator = abs(denominator)
+
+        common_divisor: int = gcd(numerator, denominator)
+        self.numerator = numerator // common_divisor
+        self.denominator = denominator // common_divisor
 
     def __add__(self, other: Fraction) -> Fraction:
         """Adds two Fractions together."""
@@ -36,7 +42,7 @@ class Fraction:
         return f"{self.numerator}/{self.denominator}"
 
 
-fraction_a = Fraction(1, 4)
+fraction_a = Fraction(-1, -4)
 fraction_b = Fraction(1, 2)
 
 print(f"Sum of {fraction_a} and {fraction_b} is {fraction_a + fraction_b}\n"
