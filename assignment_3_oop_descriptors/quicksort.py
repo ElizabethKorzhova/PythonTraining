@@ -18,13 +18,14 @@ def fast_sort(list_to_sort: list[Person], key: Callable[[Person], Any]) -> list[
     return fast_sort(less, key) + [pivot] + fast_sort(greater, key)
 
 
-persons_list = [
-    Person("John", 28),
-    Person("Andrew", 28),
-    Person("Nick", 20),
-]
+if __name__ == "__main__":
+    persons_list = [
+        Person("John", 28),
+        Person("Andrew", 28),
+        Person("Nick", 20),
+    ]
 
-sorted_list = fast_sort(persons_list, lambda person: (person.age, person.name))
-print("Sorted by age:")
-for person_data in sorted_list:
-    print(f"{person_data.name}, {person_data.age} years old")
+    sorted_list = fast_sort(persons_list, lambda person: (person.age, person.name))
+    print("Sorted by age:")
+    for person_data in sorted_list:
+        print(f"{person_data.name}, {person_data.age} years old")

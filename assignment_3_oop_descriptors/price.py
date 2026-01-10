@@ -59,10 +59,11 @@ class Price:
         return price.quantize(Decimal("0.01"))
 
 
-price_1 = Price("0.1")
-price_2 = Price("0.2")
-print(f"Sum of {price_1} and {price_2} is {price_1 + price_2}\n"
-      f"Difference of {price_2} and {price_1} is {price_2 - price_1}\n"
-      f"Is {price_1} less than {price_2}? {price_1 < price_2}\n"
-      f"Is {price_1} greater than {price_2}? {price_1 > price_2}\n"
-      f"Are {price_1} and {price_2} equal? {price_1 == price_2}\n")
+if __name__ == "__mail__":
+    price_1 = Price("0.1")
+    price_2 = Price("0.2")
+    print(f"Sum of {price_1} and {price_2} is {price_1 + price_2}\n"
+          f"Difference of {price_2} and {price_1} is {price_2 - price_1}\n"
+          f"Is {price_1} less than {price_2}? {price_1 < price_2}\n"
+          f"Is {price_1} greater than {price_2}? {price_1 > price_2}\n"
+          f"Are {price_1} and {price_2} equal? {price_1 == price_2}\n")

@@ -23,17 +23,17 @@ class Person:
 
     def __lt__(self, other: Person) -> bool:
         """Checks if the Person is younger than the other."""
-        return self.age < other.age
+        return self.__age < other.age
 
     def __gt__(self, other: Person) -> bool:
         """Checks if the Person is older than the other."""
-        return self.age > other.age
+        return self.__age > other.age
 
     def __eq__(self, other: object) -> bool:
         """Checks if two Person are the same age."""
         if not isinstance(other, Person):
             return NotImplemented
-        return self.age == other.age
+        return self.__age == other.age
 
 
 if __name__ == "__main__":

@@ -47,7 +47,8 @@ class ProductWithGetSet:
         return price.quantize(Decimal("0.01"))
 
 
-product_1 = ProductWithGetSet("Doll", 10.2)
-print(f"{product_1.get_name()}: {product_1.get_price()}\n"
-      f"through __repr__\n{product_1}")
-product_1.set_price(-10.1)
+if __name__ == "__main__":
+    product_1 = ProductWithGetSet("Doll", 10.2)
+    print(f"{product_1.get_name()}: {product_1.get_price()}\n"
+          f"through __repr__\n{product_1}")
+    product_1.set_price(-10.1)

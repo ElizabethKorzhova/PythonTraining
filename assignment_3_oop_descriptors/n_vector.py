@@ -47,35 +47,37 @@ class NVector:
 
     def __lt__(self, other: NVector) -> bool:
         """Checks if the length of NVector is less than the other."""
-        return self.magnitude() < other.magnitude()
+        return self.get_vector_magnitude() < other.get_vector_magnitude()
 
     def __gt__(self, other: NVector) -> bool:
         """Checks if the length of NVector is greater than the other."""
-        return self.magnitude() > other.magnitude()
+        return self.get_vector_magnitude() > other.get_vector_magnitude()
 
     def __eq__(self, other: object) -> bool:
         """Checks if the lengths of two NVectors are equal."""
         if not isinstance(other, NVector):
             return NotImplemented
-        return self.magnitude() == other.magnitude()
+        return self.get_vector_magnitude() == other.get_vector_magnitude()
 
     def check_dimension(self, other: NVector) -> None:
         """Checks if two vectors have the different dimension."""
         if len(self.__coordinates) != len(other.coordinates):
             raise ValueError("Cannot perform operation on vectors that have different dimensions.")
 
-    def magnitude(self) -> int | float:
+    def get_vector_magnitude(self) -> int | float:
         """Calculates the magnitude (length) of the vector."""
         return sqrt(sum(coord ** 2 for coord in self.__coordinates))
 
 
-vector_1 = NVector([1, 2, 3, 5, 9])
-vector_2 = NVector([4, 5, 6, 10, 12])
-print(f"Sum of {vector_1} and {vector_2} is {vector_1 + vector_2}\n"
-      f"Difference of {vector_1} and {vector_2} is {vector_1 - vector_2}\n"
-      f"Dot product of {vector_1} and {vector_2} is {vector_1 * vector_2}\n"
-      f"The length of {vector_1} is {vector_1.magnitude()}\n"
-      f"The length of {vector_2} is {vector_2.magnitude()}\n"
-      f"Is the length of {vector_1} less than the length of {vector_2}? {vector_1 < vector_2}\n"
-      f"Is the length of {vector_1} greater than the length of {vector_2}? {vector_1 > vector_2}\n"
-      f"Are the length of{vector_1} and length of {vector_2} equal? {vector_1 == vector_2}\n")
+if __name__ == "__main__":
+    vector_1 = NVector([1, 2, 3, 5, 9])
+    vector_2 = NVector([4, 5, 6, 10, 12])
+    print(f"Sum of {vector_1} and {vector_2} is {vector_1 + vector_2}\n"
+          f"Difference of {vector_1} and {vector_2} is {vector_1 - vector_2}\n"
+          f"Dot product of {vector_1} and {vector_2} is {vector_1 * vector_2}\n"
+          f"The length of {vector_1} is {vector_1.get_vector_magnitude()}\n"
+          f"The length of {vector_2} is {vector_2.get_vector_magnitude()}\n"
+          f"Is the length of {vector_1} less than the length of {vector_2}? {vector_1 < vector_2}\n"
+          f"Is the length of {vector_1} greater than the length of {vector_2}? "
+          f"{vector_1 > vector_2}\nAre the length of{vector_1} and length of {vector_2} "
+          f"equal? {vector_1 == vector_2}\n")

@@ -42,15 +42,16 @@ class Vector:
         return f"({self.x_component}, {self.y_component})"
 
 
-vector_1 = Vector(1, 2)
-vector_2 = Vector(5, 3)
-vector_3 = Vector(1, 2)
+if __name__ == "__main__":
+    vector_1 = Vector(1, 2)
+    vector_2 = Vector(5, 3)
+    vector_3 = Vector(1, 2)
 
-print(f"Sum of {vector_1} and {vector_2} is {vector_1 + vector_2}\n"
-      f"Difference of {vector_1} and {vector_2} is {vector_1 - vector_2}\n"
-      f"Product of {vector_1} by 2 is {vector_1 * 2}\n"
-      f"Is the length of {vector_1} less than the length of {vector_2}? {vector_1 < vector_2}\n"
-      f"The length of {vector_1} is {vector_1.get_vector_length()}\n"
-      f"The length of {vector_2} is {vector_2.get_vector_length()}\n"
-      f"Are the length of{vector_1} and length of {vector_2} equal? {vector_1 == vector_2}\n"
-      f"Are the length of {vector_1} and length of {vector_3} equal? {vector_1 == vector_3}")
+    print(f"Sum of {vector_1} and {vector_2} is {vector_1 + vector_2}\n"
+          f"Difference of {vector_1} and {vector_2} is {vector_1 - vector_2}\n"
+          f"Product of {vector_1} by 2 is {vector_1 * 2}\n"
+          f"Is the length of {vector_1} less than the length of {vector_2}? {vector_1 < vector_2}\n"
+          f"The length of {vector_1} is {vector_1.get_vector_length()}\n"
+          f"The length of {vector_2} is {vector_2.get_vector_length()}\n"
+          f"Are the length of{vector_1} and length of {vector_2} equal? {vector_1 == vector_2}\n"
+          f"Are the length of {vector_1} and length of {vector_3} equal? {vector_1 == vector_3}")
