@@ -1,11 +1,54 @@
 """This module is designed to implement descriptors."""
 
+import re
 from decimal import Decimal
 from typing import Literal
 from forex_python.converter import CurrencyRates
 
 USD_RATE: float = CurrencyRates().get_rate("USD", "EUR")
 EUR_RATE: float = CurrencyRates().get_rate("EUR", "USD")
+REGEX = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}"
+
+
+class Descriptor:
+    """Represents the Descriptor for classes."""
+
+    def __set_name__(self, owner, name) -> None:
+        """Sets the name to attributes."""
+        self.name = "__" + name
+
+    def __get__(self, instance, owner) -> str | Decimal:
+        """Gets attribute by the name."""
+        return instance.__dict__[self.name]
+
+    def __set__(self, instance, value: float | str) -> None:
+        """Sets attribute by the name."""
+        if isinstance(value, str) and not value:
+            raise ValueError(f"The value of {self.name[2:]} must exist.")
+        if isinstance(value, float) and value < 0:
+            raise ValueError("Price cannot be negative.")
+        if isinstance(value, float):
+            instance.__dict__[self.name] = Decimal(str(value))
+        else:
+            instance.__dict__[self.name] = value
+
+
+class EmailDescriptor:
+    """Represents the EmailDescriptor for checking correctness of email address."""
+
+    def __set_name__(self, owner, name) -> None:
+        """Sets the name to attributes."""
+        self.name = "__" + name
+
+    def __get__(self, instance, owner) -> str:
+        """Gets attribute by the name."""
+        return instance.__dict__[self.name]
+
+    def __set__(self, instance, value: str) -> None:
+        """Sets attribute by the name."""
+        if not re.fullmatch(REGEX, value):
+            raise ValueError("Email address is not valid.")
+        instance.__dict__[self.name] = value
 
 
 class CurrencyDescriptor:
@@ -33,26 +76,3 @@ class CurrencyDescriptor:
                 instance.price *= Decimal(str(EUR_RATE))
 
         instance.__dict__[self.name] = value
-
-
-class ProductDescriptor:
-    """Represents the Descriptor for ProductWithDescriptor class."""
-
-    def __set_name__(self, owner, name) -> None:
-        """Sets the name to attributes."""
-        self.name = "__" + name
-
-    def __get__(self, instance, owner) -> str | Decimal:
-        """Gets attribute by the name."""
-        return instance.__dict__[self.name]
-
-    def __set__(self, instance, value: float | str) -> None:
-        """Sets attribute by the name."""
-        if isinstance(value, str) and not value:
-            raise ValueError("Name of a product must exist.")
-        if isinstance(value, float) and value < 0:
-            raise ValueError("Price cannot be negative.")
-        if isinstance(value, float):
-            instance.__dict__[self.name] = Decimal(str(value))
-        else:
-            instance.__dict__[self.name] = value
