@@ -2,6 +2,7 @@
 performs basic arithmetic operations."""
 
 from __future__ import annotations
+from decimal import Decimal, InvalidOperation, Overflow
 
 ALLOWED_OPERATIONS: list[str] = ["+", "-", "*", "/", "e"]
 
@@ -21,34 +22,34 @@ class UnknownOperationError(Exception):
         super().__init__(f"Operation {operation} not allowed.")
 
 
-class Integer:
-    """Class that represents Integer number."""
+class Number:
+    """Class that represents Number."""
 
-    def __init__(self, number: int) -> None:
-        """Initializes Integer class with given number."""
+    def __init__(self, number: Decimal) -> None:
+        """Initializes Number class with given number in decimal type."""
         self.__number = number
 
     @property
-    def number(self) -> int:
+    def number(self) -> Decimal:
         """Gets private number attribute."""
         return self.__number
 
-    def __add__(self, other: Integer) -> int:
+    def __add__(self, other: Number) -> Decimal:
         """Adds two numbers."""
         return self.__number + other.number
 
-    def __sub__(self, other: Integer) -> int:
+    def __sub__(self, other: Number) -> Decimal:
         """Subtracts two numbers."""
         return self.__number - other.number
 
-    def __mul__(self, other: Integer) -> int:
+    def __mul__(self, other: Number) -> Decimal:
         """Multiplies two numbers."""
         return self.__number * other.number
 
-    def __truediv__(self, other: Integer) -> float:
+    def __truediv__(self, other: Number) -> Decimal:
         """Divides two numbers."""
         if other.number == 0:
-            raise ZeroDivisionError("Cannot divide by zero")
+            raise ZeroDivisionError("Cannot divide by zero.")
         return self.__number / other.number
 
 
@@ -64,26 +65,23 @@ if __name__ == "__main__":
                 print("\nCalculator closed.")
                 break
 
-            first_number: int = int(input("Enter first number: "))
-            second_number: int = int(input("Enter second number: "))
+            first_number: Decimal = Decimal(input("Enter first number >>> "))
+            second_number: Decimal = Decimal(input("Enter second number >>> "))
 
             if operation_choice == "+":
-                print(f"Result: {Integer(first_number) + Integer(second_number)}\n")
+                print(f"Result: {Number(first_number) + Number(second_number)}\n")
 
             if operation_choice == "-":
-                print(f"Result: {Integer(first_number) - Integer(second_number)}\n")
+                print(f"Result: {Number(first_number) - Number(second_number)}\n")
 
             if operation_choice == "*":
-                print(f"Result: {Integer(first_number) * Integer(second_number)}\n")
+                print(f"Result: {Number(first_number) * Number(second_number)}\n")
 
             if operation_choice == "/":
-                print(f"Result: {Integer(first_number) / Integer(second_number)}\n")
+                print(f"Result: {Number(first_number) / Number(second_number)}\n")
 
-        except UnknownOperationError as ex:
+        except (UnknownOperationError, Overflow, ZeroDivisionError) as ex:
             print(f"\n{ex}\n")
 
-        except ValueError as ex:
-            print(f"\nNumber must be an integer: {ex}\n")
-
-        except ZeroDivisionError as ex:
-            print(f"\n{ex}\n")
+        except InvalidOperation:
+            print("\nInvalid input data, not a number\n")
