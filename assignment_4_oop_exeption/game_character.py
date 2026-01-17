@@ -1,7 +1,9 @@
-"""This module is designed for developing flexible mechanism for processing various
-game events, providing detailed information about the events that occurred."""
+"""This module is designed for developing GameCharacter class for processing various
+game events and collected resources, as well as to provide detailed information about
+the game event that occurred and the lack of resources."""
 
-from dataclasses import dataclass
+from game_data_classes import CharacterMetrics, DeathInfo, CharacterResources
+from game_exceptions import GameEventException, InsufficientResourcesException
 
 LEVELS = {
     1: 100,
@@ -10,59 +12,6 @@ LEVELS = {
     4: 800,
     5: 1600,
 }
-
-
-class GameEventException(Exception):
-    """Exception raised when game event occurs."""
-
-    def __init__(self, event_type: str, details: dict) -> None:
-        """Initializes GameEventException class with event_type and details to
-        insert into the exception."""
-        self.event_type, self.details = event_type, details
-        formatted_details = "\n\t".join(
-            f"{key}: {value}" for key, value in details.items()
-        )
-
-        super().__init__(f"{event_type}\n\t{formatted_details}")
-
-
-class InsufficientResourcesException(Exception):
-    """Exception raised when resources are not sufficient."""
-
-    def __init__(self, required_resource, required_amount, current_amount) -> None:
-        """Initializes InsufficientResourcesException class with required_resource,
-        required_amount and current_amount to insert into the exception."""
-        self.required_resource = required_resource
-        self.required_amount = required_amount
-        self.current_amount = current_amount
-
-        super().__init__(
-            f"\nInsufficient resources: you need collect {required_amount - current_amount} "
-            f"more {required_resource}"
-        )
-
-
-@dataclass
-class DeathInfo:
-    """Data class that contains information about death of character."""
-    cause_death: str = ""
-    death_place: str = ""
-
-
-@dataclass
-class CharacterMetrics:
-    """Data class that contains information about character."""
-    level: int = 1
-    experience_points: int = 50
-    health_points: int = 100
-
-
-@dataclass
-class CharacterResources:
-    """Data class that contains information about character resources."""
-    required_resource: str = "wood"
-    required_amount: int = 200
-    current_amount: int = 250
 
 
 class GameCharacter:
@@ -124,23 +73,3 @@ class GameCharacter:
             {"experience points": self.character_metrics.experience_points,
              "new level": self.character_metrics.level}
         )
-
-
-def test_game(
-        character_metrics: CharacterMetrics = CharacterMetrics(),
-        character_resources: CharacterResources = CharacterResources(),
-        death_info: DeathInfo = DeathInfo(),
-
-) -> None:
-    """Tests game events and actions."""
-    try:
-        GameCharacter(character_metrics, character_resources, death_info)
-    except (GameEventException, InsufficientResourcesException, ValueError) as ex:
-        print(ex)
-
-
-if __name__ == "__main__":
-    test_game(CharacterMetrics(2, 50, 50))
-    test_game(CharacterMetrics(1, 200, 50))
-    test_game(CharacterMetrics(1, 50, 0), death_info=DeathInfo("headshot", "short"))
-    test_game(character_resources=CharacterResources("gold", 200, 50))
