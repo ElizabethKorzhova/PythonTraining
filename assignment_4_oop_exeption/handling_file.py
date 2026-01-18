@@ -1,39 +1,39 @@
 """This module is designed for reading numbers from the given text file
 and calculating their mean."""
 
-import re
 import os
 
 
-def get_numbers_from_file(file_path: str) -> list[int]:
-    """Gets list of numbers from the given text file."""
-    if os.path.getsize(file_path) == 0:
-        raise ValueError("File is empty")
+def get_mean_from_file(file_path: str) -> tuple:
+    """Gets list of numbers and their arithmetic mean from the given text file."""
+    try:
+        if os.path.exists(file_path) and os.path.getsize(file_path) == 0:
+            raise ValueError("Error: File is empty")
+        with open(file_path, "r", encoding="utf-8") as file:
+            numbers = []
+            for line in file:
+                parts = line.split()
+                for part in parts:
+                    numbers.append(float(part))
 
-    with open(file_path, "r", encoding="utf-8") as file:
-        data = file.read()
+            if not numbers:
+                raise ValueError("Error: There are not numbers in file")
 
-    if not bool(re.fullmatch(r"^[\d\s]+$", data)) or bool(re.fullmatch(
-            r"^\s+$", data)):
-        raise ValueError("File contains non-numeric characters or non-integer numbers")
-
-    numbers = list(map(int, re.findall(r"\d+", data)))
-    return numbers
-
-
-def mean(numbers: list[int]) -> int | float:
-    """Calculates the mean of a list of numbers."""
-    if len(numbers) == 1:
-        return numbers[0]
-
-    return sum(numbers) / len(numbers)
+            average = sum(numbers) / len(numbers)
+            return numbers, average
+    except FileNotFoundError:
+        return None, "Error: File not found"
+    except ValueError as ex:
+        if "could not convert string to float" in str(ex):
+            return None, "Error: File contains non-numeric characters"
+        return None, str(ex)
 
 
 if __name__ == "__main__":
-    try:
-        numbers_list = get_numbers_from_file("test.txt")
-        print(f"List of numbers from the given file: {numbers_list}\n"
-              f"Mean: {mean(numbers_list)}")
+    file_name = "test.txt"
+    nums, result = get_mean_from_file(file_name)
 
-    except (FileNotFoundError, ValueError) as ex:
-        print(ex)
+    if nums:
+        print(f"Numbers from {file_name}: {nums}\nAverage: {result:.2f}")
+    else:
+        print(result)
