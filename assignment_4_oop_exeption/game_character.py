@@ -24,9 +24,9 @@ class GameCharacter:
             death_info: DeathInfo = DeathInfo(),
     ) -> None:
         """Initializes GameCharacter class with optional attributes:
-         - character_metrics (include level, experience_points (xp), health_points (hp));
-         - character_resources (include required_resource, required_amount, current_amount);
-         - optional death info (include cause_death, death_place)."""
+         - character_metrics (includes level, experience_points (xp), health_points (hp));
+         - character_resources (includes required_resource, required_amount, current_amount);
+         - death info (includes cause_death, death_place)."""
         self.character_metrics = character_metrics
         self.character_resources = character_resources
         self.death_info = death_info
