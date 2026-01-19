@@ -1,4 +1,4 @@
-"""This module is designed to implement analyze_object function that find:
+"""This module is designed to implement analyze_object function that finds:
     - object type
     - methods and attributes of the object.
     - type of methods and attributes of the object."""
