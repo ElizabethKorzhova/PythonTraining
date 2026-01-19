@@ -1,6 +1,6 @@
 """This script is designed to test analyze_object function."""
 
-from analyze_object import analyze_object
+from assignment_5_introspection_reflection.analyze_object import analyze_object
 
 
 # pylint: disable=too-few-public-methods
