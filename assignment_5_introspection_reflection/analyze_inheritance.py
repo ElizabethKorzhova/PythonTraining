@@ -1,11 +1,19 @@
 """This module is designed to implement analyze_object function that finds
-parent class and all its methods"""
+parent class and all its methods (full inheritance)."""
 
 
 def analyze_inheritance(cls: type) -> None:
-    """Find parent class, all its methods and print these data."""
-    print(f"{cls.__name__} class inherits:")
-    for name_attribute, attribute in cls.__base__.__dict__.items():
-        if (callable(attribute) and not name_attribute.startswith("__") and
-                not name_attribute.endswith("__")):
-            print(f"\t-{name_attribute} from {cls.__base__.__name__}")
+    """Find parent class, all its methods and print these data (full inheritance)."""
+
+    for current_class in cls.__mro__[:-1]:
+        parent_class = current_class.__base__
+        message = f"{current_class.__name__} class inherits:\n" if parent_class != object \
+            else f"{current_class.__name__} class based on {parent_class.__name__}"
+
+        if parent_class != object:
+            for name_attribute, attribute in parent_class.__dict__.items():
+                if (callable(attribute) and not name_attribute.startswith("__") and
+                        not name_attribute.endswith("__")):
+                    message += f"\t-{name_attribute} from {parent_class.__name__}\n"
+
+        print(message)
