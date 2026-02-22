@@ -1,4 +1,4 @@
-"""This module is designed to implement Singleton design pattern which ensures that only
+"""This script is designed to implement Singleton design pattern which ensures that only
 one object of its kind exists and provides a single point of access to it for any other code."""
 
 

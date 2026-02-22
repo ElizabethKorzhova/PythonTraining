@@ -1,4 +1,4 @@
-"""This module is designed to implement MutableClass which has methods for
+"""This script is designed to implement MutableClass which has methods for
 dynamically adding and removing object attributes"""
 
 from typing import Any
@@ -14,3 +14,13 @@ class MutableClass:
     def remove_attribute(self, name: str) -> None:
         """Removes attribute with value from instance."""
         delattr(self, name)
+
+
+if __name__ == '__main__':
+    obj = MutableClass()
+
+    obj.add_attribute("name", "Python")
+    print(obj.name)
+
+    obj.remove_attribute("name")
+    print(obj.name)

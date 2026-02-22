@@ -1,4 +1,4 @@
-"""This module is designed to implement analyze_object function that finds
+"""This script is designed to implement analyze_object function that finds
 parent class and all its methods (full inheritance)."""
 
 
@@ -17,3 +17,22 @@ def analyze_inheritance(cls: type) -> None:
                     message += f"\t-{name_attribute} from {parent_class.__name__}\n"
 
         print(message)
+
+
+if __name__ == '__main__':
+    class GrandParent:
+        def grand_parent_method(self):
+            pass
+
+
+    class Parent(GrandParent):
+        def parent_method(self):
+            pass
+
+
+    class Child(Parent):
+        def child_method(self):
+            pass
+
+
+    analyze_inheritance(Child)

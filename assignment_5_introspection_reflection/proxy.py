@@ -1,4 +1,4 @@
-"""This module is designed to implement Proxy class which takes an object
+"""This script is designed to implement Proxy class which takes an object
 and redirects calls to the methods of this object, additionally logging the calls"""
 
 
@@ -27,3 +27,19 @@ class Proxy:
             return wrapper
         print(f"Property: {name_attribute}")
         return obj_attribute
+
+
+if __name__ == '__main__':
+    class MyClass:
+        def __init__(self, name="Alice"):
+            self.name = name
+
+        def greet(self, name: str, age: int) -> str:
+            return f"Hello, {name}, you are {age} years old"
+
+
+    myclass_1 = MyClass()
+    proxy = Proxy(myclass_1)
+    result = proxy.greet("Alice", age=20)
+    print(result)
+    print(proxy.name)
