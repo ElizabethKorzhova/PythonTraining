@@ -3,7 +3,12 @@
 from assignment_5_introspection_reflection.analyze_inheritance import analyze_inheritance
 
 
-class Parent:
+class GrandParent:
+    def grand_parent_method(self):
+        pass
+
+
+class Parent(GrandParent):
     def parent_method(self):
         pass
 
