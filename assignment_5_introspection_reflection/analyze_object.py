@@ -16,3 +16,20 @@ def analyze_object(obj: object) -> None:
     print("Attributes and methods (dunder methods not included):")
     for member in non_dunder_members:
         print(f"- {member}: {type(getattr(obj, member))}")
+
+
+if __name__ == '__main__':
+    class MyClass:
+        """This class is designed to test analyze_object function."""
+
+        def __init__(self, value):
+            """Initializes MyClass with value."""
+            self.value = value
+
+        def say_hello(self):
+            """Returns message with value."""
+            return f"Hello, {self.value}"
+
+
+    obj = MyClass("World")
+    analyze_object(obj)
