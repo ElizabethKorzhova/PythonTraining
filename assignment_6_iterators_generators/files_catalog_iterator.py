@@ -3,8 +3,7 @@ and return in one by one with their name and size."""
 from __future__ import annotations
 import os
 
-DIR_NAME = "metas"
-DIR_PATH = os.getcwd() + "/" + DIR_NAME
+DIR_PATH = os.getcwd()
 
 
 class FilesCatalogIterator:
@@ -15,7 +14,7 @@ class FilesCatalogIterator:
         self._folder_path = folder_path
 
     def __iter__(self) -> FilesCatalogIterator:
-        """Gets all images in directory, initialize new protected attributes
+        """Gets all files in directory, initialize new protected attributes
         and return the iterator object."""
         self._total_files = os.listdir(self._folder_path)
         self._current_index = 0
