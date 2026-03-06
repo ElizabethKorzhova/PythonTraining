@@ -5,6 +5,7 @@ If the processing is successful, the original file is replaced with the new one.
 In case of an error, the backup is automatically restored."""
 import os
 import shutil
+from typing import TextIO
 
 
 class AutomaticBackupContextManager:
@@ -15,11 +16,11 @@ class AutomaticBackupContextManager:
         """Initialize context manager with file_path parameter to create backup of the file
         and restore the original file in case of error."""
         self._file_path = file_path
-        self._file_object = None
+        self._file_object: TextIO | None = None
         self._backup_file_path = os.getcwd() + "/" + os.path.splitext(self._file_path)[0] + \
                                  "_backup" + os.path.splitext(self._file_path)[1]
 
-    def __enter__(self):
+    def __enter__(self) -> TextIO:
         """Opens given file, creates the backup of the file and returns the file object."""
         if not os.path.exists(self._file_path):
             raise FileNotFoundError(f"File {self._file_path} does not exist")
@@ -28,7 +29,7 @@ class AutomaticBackupContextManager:
         self._file_object = open(self._file_path, "r", encoding="utf-8")
         return self._file_object
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
         """Restores the backup of the file in case of error and closes the file object."""
         if self._file_object:
             self._file_object.close()
