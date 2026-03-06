@@ -2,7 +2,8 @@
 that automatically creates the archive, adds files, and after exiting completes the archiving."""
 import os
 import zipfile
-from typing import Optional
+from typing import Type
+from types import TracebackType
 
 
 class ArchiveContextManager:
@@ -13,7 +14,7 @@ class ArchiveContextManager:
         and to add files to it.."""
         self._dir_path = dir_path
         self._dir_name = os.path.basename(dir_path)
-        self._zip_file: Optional[zipfile.ZipFile] = None
+        self._zip_file: zipfile.ZipFile | None = None
 
     def __enter__(self) -> zipfile.ZipFile:
         """Creates the archive, adds files to it and returns zipfile object."""
@@ -25,7 +26,8 @@ class ArchiveContextManager:
             self._zip_file.write(self._dir_name + "/" + file)
         return self._zip_file
 
-    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+    def __exit__(self, exc_type: Type[BaseException] | None, exc_val: BaseException | None,
+                 exc_tb: TracebackType | None) -> None:
         """Closes the zipfile object."""
         if self._zip_file:
             self._zip_file.close()

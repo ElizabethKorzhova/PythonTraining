@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 import os
+from typing import List
 
 from PIL import Image, ExifTags
 
@@ -17,12 +18,12 @@ class ImgMetaIterator:
     def __init__(self, folder_path: str) -> None:
         """Initialize the iterator with protected folder_path."""
         self._folder_path = folder_path
+        self._img_list: List[str] = os.listdir(self._folder_path)
+        self._current_index = 0
 
     def __iter__(self) -> ImgMetaIterator:
         """Gets all images in directory, initialize new protected attributes
         and return the iterator object."""
-        self._img_list = os.listdir(self._folder_path)
-        self._current_index = 0
         return self
 
     def __next__(self):

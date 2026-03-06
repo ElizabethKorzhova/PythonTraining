@@ -2,6 +2,7 @@
 and return in one by one with their name and size."""
 from __future__ import annotations
 import os
+from typing import List
 
 DIR_PATH = os.getcwd()
 
@@ -12,12 +13,12 @@ class FilesCatalogIterator:
     def __init__(self, folder_path: str) -> None:
         """Initialize the iterator with protected folder_path."""
         self._folder_path = folder_path
+        self._total_files: List[str] = os.listdir(self._folder_path)
+        self._current_index = 0
 
     def __iter__(self) -> FilesCatalogIterator:
         """Gets all files in directory, initialize new protected attributes
         and return the iterator object."""
-        self._total_files = os.listdir(self._folder_path)
-        self._current_index = 0
         return self
 
     def __next__(self) -> str:
