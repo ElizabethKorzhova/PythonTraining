@@ -6,7 +6,8 @@ import os
 import configparser
 import json
 import copy
-from typing import Any, Literal, Optional, Dict
+from typing import Any, Optional, Dict, Type
+from types import TracebackType
 
 
 class ConfigFilesContextManager:
@@ -49,11 +50,11 @@ class ConfigFilesContextManager:
         self._origin_dict = copy.deepcopy(self._config_dict)
         return self
 
-    def __exit__(self, exc_type, exc_val, exc_tb) -> Literal[False]:
+    def __exit__(self, exc_type: Type[BaseException] | None, exc_val: BaseException | None,
+                 exc_tb: TracebackType | None) -> None:
         """Saves the changes to the file if changes were made."""
         if self._config_dict != self._origin_dict:
             self._write_config_to_file()
-        return False
 
     def _write_config_to_file(self) -> None:
         """Writes the changes to the config file (ini or json) from protected

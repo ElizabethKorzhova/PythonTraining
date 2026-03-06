@@ -8,12 +8,13 @@ class ReverseFileIterator:
     def __init__(self, filename: str) -> None:
         """Initialize the iterator with protected filename."""
         self._filename = filename
+        self._lines: list[str] | None = None
+        self._current_index = 0
 
     def __iter__(self) -> ReverseFileIterator:
         """Read all lines, initialize new protected attributes and return the iterator object."""
         with open(self._filename, "r", encoding="utf-8") as file:
-            self._lines: list[str] = file.readlines()[::-1]
-            self._current_index = 0
+            self._lines = file.readlines()[::-1]
         return self
 
     def __next__(self) -> str:

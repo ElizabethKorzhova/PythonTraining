@@ -5,7 +5,8 @@ If the processing is successful, the original file is replaced with the new one.
 In case of an error, the backup is automatically restored."""
 import os
 import shutil
-from typing import TextIO
+from typing import TextIO, Type
+from types import TracebackType
 
 
 class AutomaticBackupContextManager:
@@ -29,7 +30,8 @@ class AutomaticBackupContextManager:
         self._file_object = open(self._file_path, "r", encoding="utf-8")
         return self._file_object
 
-    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+    def __exit__(self, exc_type: Type[BaseException] | None, exc_val: BaseException | None,
+                 exc_tb: TracebackType | None) -> None:
         """Restores the backup of the file in case of error and closes the file object."""
         if self._file_object:
             self._file_object.close()
