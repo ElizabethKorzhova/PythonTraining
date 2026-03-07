@@ -9,11 +9,11 @@ class StudentsCSVManager:
 
     Public methods:
         create_csv():
-            creates a csv file
+            creates a csv file;
         read_csv():
-            reads a csv file
+            reads a csv file;
         get_mean_students_grade():
-            returns the average student grade.
+            returns the average student grade as a string;
         add_student():
             adds a student data to the csv file.
     """
@@ -51,8 +51,8 @@ class StudentsCSVManager:
         for data in self._data:
             yield ", ".join(data.values())
 
-    def get_mean_students_grade(self):
-        """Calculates the average student grade."""
+    def get_mean_students_grade(self) -> str:
+        """Calculates the average student grade and returns result as a string."""
         count = 0
         total = 0
         for data in self._data:
