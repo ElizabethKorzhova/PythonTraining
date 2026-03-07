@@ -7,5 +7,6 @@ __pycache__/
 *.log
 *test.ini
 *test.json
+*books.json
 *.zip
 *.csv
