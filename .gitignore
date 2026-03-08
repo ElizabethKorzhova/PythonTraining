@@ -1,12 +1,23 @@
 /.idea
 __pycache__/
-*.txt
 *.DS_Store
-*/test_img
-*/metas
-*.log
+
+# Test configs
 *test.ini
 *test.json
-*books.json
-*.zip
+
+# Test logs
+*.log
+
+# Test folders
+*/test_img
+*/metas
+
+# Test data files
 *.csv
+*.txt
+*books.json
+*products.xml
+
+# Archives
+*.zip
