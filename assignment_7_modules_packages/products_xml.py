@@ -1,7 +1,7 @@
 """This module provides ProductsXMLManager class to manage products data in xml format."""
 import os.path
 import xml.etree.ElementTree as ElTree
-from typing import List, Generator, Optional
+from typing import List, Generator
 
 
 class ProductsXMLManager:

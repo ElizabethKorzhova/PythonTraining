@@ -4,7 +4,6 @@ __pycache__/
 
 # Test configs
 *test.ini
-*test.json
 
 # Test logs
 *.log
@@ -16,7 +15,7 @@ __pycache__/
 # Test data files
 *.csv
 *.txt
-*books.json
+*.json
 *products.xml
 
 # Archives
