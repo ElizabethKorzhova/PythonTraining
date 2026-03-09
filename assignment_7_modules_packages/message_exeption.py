@@ -1,4 +1,4 @@
-"""Module provides custom exceptions MessageSendingException that raised
+"""Module provides custom exception MessageSendingException that raised
 when messages won't be sent."""
 
 

@@ -24,7 +24,7 @@ class SMSService:
 
     @staticmethod
     def send_sms(phone_number: str, message: str) -> None:
-        """Sends the given message to phone number."""
+        """Imitates sending the given message to phone number."""
         print(f"Sending SMS to {phone_number}: {message}")
 
 
@@ -33,13 +33,16 @@ class EmailService:
 
     @staticmethod
     def send_email(email_address: str, message: str) -> None:
-        """Sends the given message to email address."""
+        """Imitates sending the given message to email address."""
         print(f"Sending the Email to {email_address}: {message}")
 
 
 class PushService:
+    """Class to represent PushService."""
+
     @staticmethod
     def send_push(device_id: str, message: str) -> None:
+        """Imitates sending the given message to push address."""
         print(f"Sending the push notification to the device {device_id}: {message}")
 
 
