@@ -1,4 +1,6 @@
 """Module is designed for test FileProcessor class"""
+from pathlib import Path
+
 import pytest
 
 from assignment_8_testing.file_processor import FileProcessor
@@ -14,14 +16,14 @@ def file_processor() -> FileProcessor:
 
 
 @pytest.fixture
-def file_path(tmpdir, file_processor: FileProcessor) -> str:
+def file_path(tmp_path: Path, file_processor: FileProcessor) -> str:
     """
     Fixture to create temporary filepath and write simple data to the file for further tests.
-    :param tmpdir: fixture to create temporary file
+    :param tmp_path: fixture to create temporary file (instance of Path)
     :param file_processor: instance of FileProcessor class
     :return: path to temporary file (string)
     """
-    file_path = tmpdir.join("testfile.txt")
+    file_path = str(tmp_path / "testfile.txt")
     file_processor.write_to_file(file_path, "Hello, World!")
     return file_path
 
