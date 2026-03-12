@@ -18,7 +18,8 @@ def bank_account() -> BankAccount:
 @pytest.mark.parametrize(("amount", "balance"), ((100.0, 200.0), (51.0, 151.0), (1, 101)))
 def test_deposit_successes(bank_account: BankAccount, amount, balance) -> None:
     """
-    Tests deposit method of BankAccount class for compliance of the expected result with the actual result.
+    Tests deposit method of BankAccount class for compliance of the expected result
+    with the actual result.
     :param bank_account: instance of BankAccount class
     """
     bank_account.deposit(amount)
@@ -27,7 +28,8 @@ def test_deposit_successes(bank_account: BankAccount, amount, balance) -> None:
 
 
 @pytest.mark.parametrize(("amount", "expected_exception"),
-                         ((-100.0, ValueError), ("51", TypeError), (0, ValueError), (0.0, ValueError)))
+                         ((-100.0, ValueError), ("51", TypeError),
+                          (0, ValueError), (0.0, ValueError)))
 def test_deposit_exceptions(bank_account: BankAccount, amount: int | float | str,
                             expected_exception: TypeError | ValueError) -> None:
     """
@@ -43,7 +45,8 @@ def test_deposit_exceptions(bank_account: BankAccount, amount: int | float | str
 @pytest.mark.parametrize("amount", (100, 10, 1.1, 50, 25.7, 100.0))
 def test_withdraw_successes(bank_account: BankAccount, amount: int | float) -> None:
     """
-    Tests method withdraw of BankAccount class for compliance of the expected result with the actual result.
+    Tests method withdraw of BankAccount class for compliance of
+    the expected result with the actual result.
     :param bank_account: instance of BankAccount class
     :param amount: amount of money to withdraw cash
     """
@@ -54,7 +57,8 @@ def test_withdraw_successes(bank_account: BankAccount, amount: int | float) -> N
 
 
 @pytest.mark.parametrize(("amount", "expected_exception"),
-                         (("34", TypeError), (200, ValueError), (100.01, ValueError), (-10, ValueError)))
+                         (("34", TypeError), (200, ValueError),
+                          (100.01, ValueError), (-10, ValueError)))
 def test_withdraw_exceptions(bank_account: BankAccount, amount: str | float | int,
                              expected_exception: ValueError | TypeError) -> None:
     """
@@ -67,10 +71,14 @@ def test_withdraw_exceptions(bank_account: BankAccount, amount: str | float | in
         bank_account.withdraw(amount)
 
 
-@pytest.mark.parametrize(("amount", "expected_result"), ((100, 200), (1, 101), (10.1, 110.1), (50.01, 150.01)))
-def test_get_balance_successes(bank_account: BankAccount, amount: int | float, expected_result: int | float) -> None:
+@pytest.mark.parametrize(("amount", "expected_result"),
+                         ((100, 200), (1, 101),
+                          (10.1, 110.1), (50.01, 150.01)))
+def test_get_balance_successes(bank_account: BankAccount, amount: int | float,
+                               expected_result: int | float) -> None:
     """
-    Tests method get_balance of BankAccount class for compliance of the expected result with the actual result.
+    Tests method get_balance of BankAccount class for compliance
+    of the expected result with the actual result.
     :param bank_account: instance of BankAccount class
     :param amount: int or float positive number (amount of money)
     :param expected_result: expected amount of money
@@ -81,7 +89,8 @@ def test_get_balance_successes(bank_account: BankAccount, amount: int | float, e
 
 
 @patch("requests.get")
-def test_sync_balance_successful_response(mock_request: MagicMock, bank_account: BankAccount) -> None:
+def test_sync_balance_successful_response(mock_request: MagicMock,
+                                          bank_account: BankAccount) -> None:
     """
     Tests method sync_balance of BankAccount class for getting successful response.
     :param mock_request: instance of MagicMock that patches requests.get
