@@ -17,13 +17,7 @@ def change_date_format(string: str) -> str:
 
     Returns:
         str: the string with the date in the DD-MM-YYYY format.
-
-    Raises:
-        TypeError: if the given type of string is not str.
     """
-    if not isinstance(string, str):
-        raise TypeError('String must be of type str')
-
     return re.sub(pattern, '-', string)
 
 
