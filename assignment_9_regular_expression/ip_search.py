@@ -18,7 +18,7 @@ def find_ip_address(string: str) -> list[str]:
     Returns:
         list[str]: all IP address from the string.
     """
-    return re.findall(pattern, string)
+    return pattern.findall(string)
 
 
 if __name__ == '__main__':
