@@ -20,7 +20,7 @@ def is_valid_email(email: str) -> bool:
         bool: if the email is valid return True; otherwise return False.
 
     Raises:
-        ValueError: in case of the email is not a string.
+        TypeError: in case of the email is not a string.
     """
     if not isinstance(email, str):
         raise TypeError("Email must be a string")

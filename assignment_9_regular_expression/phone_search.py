@@ -22,7 +22,7 @@ def find_phone_numbers(string) -> list[str]:
         list[str]: a list of phone numbers.
 
     Raises:
-        ValueError: if the given type of string is not str.
+        TypeError: if the given type of string is not str.
     """
     if not isinstance(string, str):
         raise TypeError('String must be of type str.')
