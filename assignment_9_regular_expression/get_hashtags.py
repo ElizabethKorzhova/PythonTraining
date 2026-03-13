@@ -15,7 +15,7 @@ def get_hashtags(string: str) -> list[str]:
         list[str]: the list of hashtags found in the specified string.
 
     Raises:
-        ValueError: if the given type of string is not str.
+        TypeError: if the given type of string is not str.
     """
     if not isinstance(string, str):
         raise TypeError('String must be of type str')
