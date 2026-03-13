@@ -13,13 +13,7 @@ def get_hashtags(string: str) -> list[str]:
 
     Returns:
         list[str]: the list of hashtags found in the specified string.
-
-    Raises:
-        TypeError: if the given type of string is not str.
     """
-    if not isinstance(string, str):
-        raise TypeError('String must be of type str')
-
     return pattern.findall(string)
 
 
