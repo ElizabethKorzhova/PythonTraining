@@ -21,3 +21,5 @@ __pycache__/
 
 # Archives
 *.zip
+
+*.db
