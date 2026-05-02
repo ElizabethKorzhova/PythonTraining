@@ -1,9 +1,11 @@
+"""This module provides functions to manage products collection"""
 from assignment_11_nosql.utils import get_db_collections
 
 db, products_collection, _ = get_db_collections()
 
 
 def init_products() -> None:
+    """Insert test data to products collection"""
     if not "products" in db.list_collection_names():
         products_collection.insert_many([
             {
@@ -35,10 +37,19 @@ def init_products() -> None:
         products_collection.create_index([("category", 1), ("label", 1)])
 
 
-def add_product(label: str, price: float | int, category: str, count: int) -> None:
+def add_product(label: str, price: float | int, category: str, stock: int) -> None:
+    """
+    Add product to products collection
+
+    Args:
+        label (str): label of a product
+        price (float | int): price of the product
+        category (str): category of the product
+        stock (int): count of the product in stock
+    """
     products_collection.insert_one({
         "label": label,
         "price": price,
         "category": category,
-        "stock": count
+        "stock": stock,
     })
