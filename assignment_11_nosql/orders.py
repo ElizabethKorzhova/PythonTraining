@@ -1,9 +1,11 @@
 """This module provides functions to manage orders collection"""
+from datetime import datetime, timezone
 import uuid
 from typing import List, Dict
 
 from pymongo.results import InsertOneResult
 
+from assignment_11_nosql.products import decrease_products_stock, is_available
 from assignment_11_nosql.utils import get_db_collections
 
 db, products_collection, orders_collection = get_db_collections()
@@ -19,6 +21,9 @@ def create_order(customer: str, products_cart: List[Dict[str, str | int]]) -> In
     Returns:
         InsertOneResult | None: insert result or None
     """
+    if not is_available(products_cart):
+        return None
+
     pipeline = [
         {
             "$documents": products_cart
@@ -66,9 +71,12 @@ def create_order(customer: str, products_cart: List[Dict[str, str | int]]) -> In
         print(f"{customer} your cart is empty")
         return None
 
+    decrease_products_stock(products_cart)
+
     return orders_collection.insert_one({
         "order_number": str(uuid.uuid4()),
         "customer": customer,
         "cart": order[0]["cart"],
-        "total_price": order[0]["totalPrice"]
+        "total_price": order[0]["totalPrice"],
+        "created_at": datetime.now(timezone.utc),
     })
