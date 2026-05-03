@@ -74,7 +74,7 @@ def is_available(products_cart: List[Dict[str, str | int]]) -> bool:
             return False
 
         if product["quantity"] > product_in_db["stock"]:
-            print(f"Order was not created due to stock issues.")
+            print("Order was not created due to stock issues.")
             return False
     return True
 

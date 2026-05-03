@@ -4,6 +4,7 @@ import uuid
 from typing import List, Dict
 
 from pymongo.results import InsertOneResult
+from pymongo.errors import PyMongoError
 
 from assignment_11_nosql.products import decrease_products_stock, is_available
 from assignment_11_nosql.utils import get_db_collections
@@ -11,7 +12,8 @@ from assignment_11_nosql.utils import get_db_collections
 db, products_collection, orders_collection = get_db_collections()
 
 
-def create_order(customer: str, products_cart: List[Dict[str, str | int]]) -> InsertOneResult | None:
+def create_order(customer: str, products_cart: List[Dict[str, str | int]])\
+        -> InsertOneResult | None:
     """
     Add order to orders collection
 
@@ -63,7 +65,7 @@ def create_order(customer: str, products_cart: List[Dict[str, str | int]]) -> In
     try:
         cursor = db.command("aggregate", 1, pipeline=pipeline, cursor={})
         order = list(cursor["cursor"]["firstBatch"])
-    except Exception as ex:
+    except PyMongoError as ex:
         print(f"Aggregation error: {ex}")
         return None
 
@@ -110,7 +112,7 @@ def get_customer_total_spent(customer: str) -> int | float | None:
 
     try:
         result = list(orders_collection.aggregate(pipeline=pipeline))[0]
-    except Exception as ex:
+    except PyMongoError as ex:
         print(f"Aggregation error: {ex}")
         return None
     return result["total_spend"]
@@ -145,7 +147,7 @@ def get_total_sold_products(start_date: datetime, end_date: datetime) -> int | N
 
     try:
         result = list(orders_collection.aggregate(pipeline=pipeline))[0]
-    except Exception as ex:
+    except PyMongoError as ex:
         print(f"Aggregation error: {ex}")
         return None
     return result["total_quantity"]

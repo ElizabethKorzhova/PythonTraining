@@ -2,7 +2,8 @@
 from datetime import datetime, timedelta
 
 from assignment_11_nosql.products import init_products
-from assignment_11_nosql.orders import create_order, get_customer_total_spent, get_total_sold_products
+from assignment_11_nosql.orders import (create_order, get_customer_total_spent,
+                                        get_total_sold_products)
 
 if __name__ == '__main__':
     init_products()
@@ -15,6 +16,6 @@ if __name__ == '__main__':
         {"label": "Cucumber", "quantity": 1}
     ])
 
-    print(f"Anna spend: {get_customer_total_spent("Anna")}\n"
-          f"Total sold per last day: {get_total_sold_products(datetime.now() - timedelta(days=1),
-                                                              datetime.now())}")
+    date = get_total_sold_products(datetime.now() - timedelta(days=1), datetime.now())
+    print(f"Anna spend: {get_customer_total_spent('Anna')}\n"
+          f"Total sold per last day: {date}")
