@@ -62,7 +62,7 @@ def create_order(customer: str, products_cart: List[Dict[str, str | int]]) -> In
 
     try:
         cursor = db.command("aggregate", 1, pipeline=pipeline, cursor={})
-        order = list(cursor['cursor']['firstBatch'])
+        order = list(cursor["cursor"]["firstBatch"])
     except Exception as ex:
         print(f"Aggregation error: {ex}")
         return None
@@ -80,3 +80,72 @@ def create_order(customer: str, products_cart: List[Dict[str, str | int]]) -> In
         "total_price": order[0]["totalPrice"],
         "created_at": datetime.now(timezone.utc),
     })
+
+
+def get_customer_total_spent(customer: str) -> int | float | None:
+    """
+    Calculate total spent of the given customer
+
+    Args:
+        customer (str): customer name
+    Returns:
+        int: total spent of the given customer
+    """
+    pipeline = [
+        {
+            "$match": {
+                "customer": customer
+            },
+        },
+        {
+            "$group": {
+                "_id": None,
+                "total_spend": {
+                    "$sum": "$total_price"
+                }
+
+            }
+        }
+    ]
+
+    try:
+        result = list(orders_collection.aggregate(pipeline=pipeline))[0]
+    except Exception as ex:
+        print(f"Aggregation error: {ex}")
+        return None
+    return result["total_spend"]
+
+
+def get_total_sold_products(start_date: datetime, end_date: datetime) -> int | None:
+    """
+    Calculate total products sold during the given period
+
+    Args:
+        start_date (datetime): start date
+        end_date (datetime): end date
+    Returns:
+        int: total sold during the given period
+    """
+    pipeline = [
+        {
+            "$match": {
+                "created_at": {"$gte": start_date, "$lte": end_date}
+            }
+        },
+        {
+            "$unwind": "$cart"
+        },
+        {
+            "$group": {
+                "_id": None,
+                "total_quantity": {"$sum": "$cart.quantity"}
+            }
+        }
+    ]
+
+    try:
+        result = list(orders_collection.aggregate(pipeline=pipeline))[0]
+    except Exception as ex:
+        print(f"Aggregation error: {ex}")
+        return None
+    return result["total_quantity"]
